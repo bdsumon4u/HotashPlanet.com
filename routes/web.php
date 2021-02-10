@@ -21,3 +21,7 @@ Route::get('/', function () {
 Route::resources([
     'roles' => RoleController::class,
 ]);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
