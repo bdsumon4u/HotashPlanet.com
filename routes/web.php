@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('article', 'article');
+
 Route::resources([
     'roles' => RoleController::class,
 ]);
