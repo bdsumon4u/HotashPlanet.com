@@ -23,6 +23,13 @@ class Permission extends Model
      */
     protected $fillable = ['group', 'action'];
 
+    protected static function boot()
+    {
+        static::addGlobalScope('oldest', function ($query) {
+            return $query->oldest('id');
+        });
+    }
+
     /**
      * All permissions grouped by group.
      *
@@ -32,7 +39,7 @@ class Permission extends Model
     public static function grouped()
     {
         return cache()->rememberForever('permissions', function () {
-            return static::oldest('id')->get()->groupBy('group');
+            return static::all()->groupBy('group');
         });
     }
 }

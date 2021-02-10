@@ -2,9 +2,9 @@
 
 namespace {{ namespace }};
 
+use App\Http\Requests\{{ model }}Request;
 use {{ namespacedModel }};
 use {{ rootNamespace }}Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class {{ class }} extends Controller
 {
@@ -15,7 +15,11 @@ class {{ class }} extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('viewAny', {{ model }}::class);
+
+        return $this->view([
+            '' => {{ model }}::all(),
+        ]);
     }
 
     /**
@@ -25,18 +29,26 @@ class {{ class }} extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', {{ model }}::class);
+
+        return $this->view([
+
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\{{ model }}Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store({{ model }}Request $request)
     {
-        //
+        {{ model }}::create($request->validated());
+
+        return redirect()
+            ->action([static::class, 'index'])
+            ->with('success', '{{ model }} Has Been Created.');
     }
 
     /**
@@ -47,7 +59,11 @@ class {{ class }} extends Controller
      */
     public function show({{ model }} ${{ modelVariable }})
     {
-        //
+        $this->authorize('view', ${{ modelVariable }});
+
+        return $this->view([
+
+        ]);
     }
 
     /**
@@ -58,19 +74,27 @@ class {{ class }} extends Controller
      */
     public function edit({{ model }} ${{ modelVariable }})
     {
-        //
+        $this->authorize('update', ${{ modelVariable }});
+
+        return $this->view([
+
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\{{ model }}Request  $request
      * @param  \{{ namespacedModel }}  ${{ modelVariable }}
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, {{ model }} ${{ modelVariable }})
+    public function update({{ model }}Request $request, {{ model }} ${{ modelVariable }})
     {
-        //
+        ${{ modelVariable }}->update($request->validated());
+
+        return redirect()
+            ->action([static::class, 'index'])
+            ->with('success', '{{ model }} Has Been Updated.');
     }
 
     /**
@@ -81,6 +105,46 @@ class {{ class }} extends Controller
      */
     public function destroy({{ model }} ${{ modelVariable }})
     {
-        //
+        $this->authorize('delete', ${{ modelVariable }});
+
+        ${{ modelVariable }}->delete();
+
+        return redirect()
+            ->action([static::class, 'index'])
+            ->with('success', '{{ model }} Has Been Deleted.');
+    }
+
+    /**
+     * Restore the specified resource from trash.
+     *
+     * @param \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function restore({{ model }} ${{ modelVariable }})
+    {
+        $this->authorize('restore', ${{ modelVariable }});
+
+        ${{ modelVariable }}->restore();
+
+        return redirect()
+            ->action([static::class, 'index'])
+            ->with('success', '{{ model }} Has Been Restored.');
+    }
+
+    /**
+     * Permanently remove the specified resource from storage.
+     *
+     * @param \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function forceDelete({{ model }} ${{ modelVariable }})
+    {
+        $this->authorize('forceDelete', ${{ modelVariable }});
+
+        ${{ modelVariable }}->forceDelete();
+
+        return redirect()
+            ->action([static::class, 'index'])
+            ->with('success', '{{ model }} Has Been Permanently Deleted.');
     }
 }

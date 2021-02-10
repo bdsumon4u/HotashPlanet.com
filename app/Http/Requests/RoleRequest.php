@@ -1,13 +1,14 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Http\Requests;
 
+use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
 
-class {{ class }} extends FormRequest
+class RoleRequest extends FormRequest
 {
-    protected $param = '';
-    protected $model = ::class;
+    protected $param = 'role';
+    protected $model = Role::class;
 
     protected $rules = [
         //
@@ -20,6 +21,7 @@ class {{ class }} extends FormRequest
      */
     public function authorize()
     {
+        return true;
         if ($this->isMethod('POST')) {
             return $this->user()->can('create', $this->model);
         }
