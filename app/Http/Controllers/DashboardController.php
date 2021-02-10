@@ -1,8 +1,8 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Http\Controllers;
 
-class {{ class }} extends RequestController
+class DashboardController extends RequestController
 {
     /**
      * Handle the incoming request.
