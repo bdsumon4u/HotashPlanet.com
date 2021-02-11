@@ -1,424 +1,404 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <style>
-            /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}a{background-color:transparent}[hidden]{display:none}html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}*,:after,:before{box-sizing:border-box;border:0 solid #e2e8f0}a{color:inherit;text-decoration:inherit}svg,video{display:block;vertical-align:middle}video{max-width:100%;height:auto}.bg-white{--bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--bg-opacity))}.bg-gray-100{--bg-opacity:1;background-color:#f7fafc;background-color:rgba(247,250,252,var(--bg-opacity))}.border-gray-200{--border-opacity:1;border-color:#edf2f7;border-color:rgba(237,242,247,var(--border-opacity))}.border-t{border-top-width:1px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.items-center{align-items:center}.justify-center{justify-content:center}.font-semibold{font-weight:600}.h-5{height:1.25rem}.h-8{height:2rem}.h-16{height:4rem}.text-sm{font-size:.875rem}.text-lg{font-size:1.125rem}.leading-7{line-height:1.75rem}.mx-auto{margin-left:auto;margin-right:auto}.ml-1{margin-left:.25rem}.mt-2{margin-top:.5rem}.mr-2{margin-right:.5rem}.ml-2{margin-left:.5rem}.mt-4{margin-top:1rem}.ml-4{margin-left:1rem}.mt-8{margin-top:2rem}.ml-12{margin-left:3rem}.-mt-px{margin-top:-1px}.max-w-6xl{max-width:72rem}.min-h-screen{min-height:100vh}.overflow-hidden{overflow:hidden}.p-6{padding:1.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.pt-8{padding-top:2rem}.fixed{position:fixed}.relative{position:relative}.top-0{top:0}.right-0{right:0}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.text-center{text-align:center}.text-gray-200{--text-opacity:1;color:#edf2f7;color:rgba(237,242,247,var(--text-opacity))}.text-gray-300{--text-opacity:1;color:#e2e8f0;color:rgba(226,232,240,var(--text-opacity))}.text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}.text-gray-500{--text-opacity:1;color:#a0aec0;color:rgba(160,174,192,var(--text-opacity))}.text-gray-600{--text-opacity:1;color:#718096;color:rgba(113,128,150,var(--text-opacity))}.text-gray-700{--text-opacity:1;color:#4a5568;color:rgba(74,85,104,var(--text-opacity))}.text-gray-900{--text-opacity:1;color:#1a202c;color:rgba(26,32,44,var(--text-opacity))}.underline{text-decoration:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.w-5{width:1.25rem}.w-8{width:2rem}.w-auto{width:auto}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}@media (min-width:640px){.sm\:rounded-lg{border-radius:.5rem}.sm\:block{display:block}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:justify-between{justify-content:space-between}.sm\:h-20{height:5rem}.sm\:ml-0{margin-left:0}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:pt-0{padding-top:0}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}}@media (min-width:768px){.md\:border-t-0{border-top-width:0}.md\:border-l{border-left-width:1px}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (prefers-color-scheme:dark){.dark\:bg-gray-800{--bg-opacity:1;background-color:#2d3748;background-color:rgba(45,55,72,var(--bg-opacity))}.dark\:bg-gray-900{--bg-opacity:1;background-color:#1a202c;background-color:rgba(26,32,44,var(--bg-opacity))}.dark\:border-gray-700{--border-opacity:1;border-color:#4a5568;border-color:rgba(74,85,104,var(--border-opacity))}.dark\:text-white{--text-opacity:1;color:#fff;color:rgba(255,255,255,var(--text-opacity))}.dark\:text-gray-400{--text-opacity:1;color:#cbd5e0;color:rgba(203,213,224,var(--text-opacity))}}
-        </style>
-
-        <style>
-            body {
-                font-family: 'Nunito';
-            }
-        </style>
-    </head>
-    <body class="antialiased">
-    <div class="bg-gray-100 overflow-x-hidden">
-        <nav class="bg-white px-6 py-4 shadow">
-            <div class="flex flex-col container mx-auto md:flex-row md:items-center md:justify-between">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <a href="#" class="text-gray-800 text-xl font-bold md:text-2xl">Brand</a>
-                    </div>
-                    <div>
-                        <button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden">
-                            <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
-                                <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
-                                </path>
-                            </svg>
-                        </button>
-                    </div>
+<x-guest-layout>
+    <div class="overflow-hidden bg-gray-900 bg-pattern">
+        <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+            <div class="flex flex-col items-center justify-between xl:flex-row">
+                <div class="w-full max-w-xl mb-12 xl:pr-16 xl:mb-0 xl:w-7/12">
+                    <h2 class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-white sm:text-4xl sm:leading-none">
+                        The quick, brown fox <br class="hidden md:block">
+                        jumps over a <span class="text-pink-400">lazy dog</span>
+                    </h2>
+                    <p class="max-w-xl mb-4 text-base text-gray-400 md:text-lg">
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudan, totam rem aperiam, eaque ipsa quae.
+                    </p>
+                    <a href="/" aria-label="" class="inline-flex items-center font-semibold tracking-wider transition-colors duration-200 text-pink-400 hover:text-pink-700">
+                        Learn more
+                        <svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
+                            <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z"></path>
+                        </svg>
+                    </a>
                 </div>
-                <div class="md:flex flex-col md:flex-row md:-mx-4 hidden">
-                    <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">Home</a>
-                    <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">Blog</a>
-                    <a href="#" class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0">About us</a>
-                </div>
-            </div>
-        </nav>
-
-        <div class="px-6 py-8">
-            <div class="flex justify-between container mx-auto">
-                <div class="w-full lg:w-8/12">
-                    <div class="flex items-center justify-between">
-                        <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Post</h1>
-                        <div>
-                            <select class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option>Latest</option>
-                                <option>Last Week</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
-                            <div class="flex justify-between items-center"><span class="font-light text-gray-600">Jun 1,
-                                2020</span><a href="#"
-                                              class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">Laravel</a>
-                            </div>
-                            <div class="mt-2"><a href="#" class="text-2xl text-gray-700 font-bold hover:underline">Build
-                                    Your New Idea with Laravel Freamwork.</a>
-                                <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                    Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
-                                    reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
-                            </div>
-                            <div class="flex justify-between items-center mt-4"><a href="#"
-                                                                                   class="text-blue-500 hover:underline">Read more</a>
-                                <div><a href="#" class="flex items-center"><img
-                                            src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
-                                            alt="avatar" class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block">
-                                        <h1 class="text-gray-700 font-bold hover:underline">Alex John</h1>
-                                    </a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
-                            <div class="flex justify-between items-center"><span class="font-light text-gray-600">mar 4,
-                                2019</span><a href="#"
-                                              class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">Design</a>
-                            </div>
-                            <div class="mt-2"><a href="#"
-                                                 class="text-2xl text-gray-700 font-bold hover:underline">Accessibility tools for
-                                    designers and developers</a>
-                                <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                    Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
-                                    reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
-                            </div>
-                            <div class="flex justify-between items-center mt-4"><a href="#"
-                                                                                   class="text-blue-500 hover:underline">Read more</a>
-                                <div><a href="#" class="flex items-center"><img
-                                            src="https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=333&amp;q=80"
-                                            alt="avatar" class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block">
-                                        <h1 class="text-gray-700 font-bold hover:underline">Jane Doe</h1>
-                                    </a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
-                            <div class="flex justify-between items-center"><span class="font-light text-gray-600">Feb 14,
-                                2019</span><a href="#"
-                                              class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">PHP</a>
-                            </div>
-                            <div class="mt-2"><a href="#" class="text-2xl text-gray-700 font-bold hover:underline">PHP:
-                                    Array to Map</a>
-                                <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                    Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
-                                    reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
-                            </div>
-                            <div class="flex justify-between items-center mt-4"><a href="#"
-                                                                                   class="text-blue-500 hover:underline">Read more</a>
-                                <div><a href="#" class="flex items-center"><img
-                                            src="https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=281&amp;q=80"
-                                            alt="avatar" class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block">
-                                        <h1 class="text-gray-700 font-bold hover:underline">Lisa Way</h1>
-                                    </a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
-                            <div class="flex justify-between items-center"><span class="font-light text-gray-600">Dec 23,
-                                2018</span><a href="#"
-                                              class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">Django</a>
-                            </div>
-                            <div class="mt-2"><a href="#" class="text-2xl text-gray-700 font-bold hover:underline">Django
-                                    Dashboard - Learn by Coding</a>
-                                <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                    Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
-                                    reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
-                            </div>
-                            <div class="flex justify-between items-center mt-4"><a href="#"
-                                                                                   class="text-blue-500 hover:underline">Read more</a>
-                                <div><a href="#" class="flex items-center"><img
-                                            src="https://images.unsplash.com/photo-1500757810556-5d600d9b737d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=735&amp;q=80"
-                                            alt="avatar" class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block">
-                                        <h1 class="text-gray-700 font-bold hover:underline">Steve Matt</h1>
-                                    </a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
-                            <div class="flex justify-between items-center"><span class="font-light text-gray-600">Mar 10,
-                                2018</span><a href="#"
-                                              class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">Testing</a>
-                            </div>
-                            <div class="mt-2"><a href="#" class="text-2xl text-gray-700 font-bold hover:underline">TDD
-                                    Frist</a>
-                                <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                    Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
-                                    reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
-                            </div>
-                            <div class="flex justify-between items-center mt-4"><a href="#"
-                                                                                   class="text-blue-500 hover:underline">Read more</a>
-                                <div><a href="#" class="flex items-center"><img
-                                            src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=373&amp;q=80"
-                                            alt="avatar" class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block">
-                                        <h1 class="text-gray-700 font-bold hover:underline">Khatab Wedaa</h1>
-                                    </a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-8">
-                        <div class="flex">
-                            <a href="#" class="mx-1 px-3 py-2 bg-white text-gray-500 font-medium rounded-md cursor-not-allowed">
-                                previous
-                            </a>
-
-                            <a href="#" class="mx-1 px-3 py-2 bg-white text-gray-700 font-medium hover:bg-blue-500 hover:text-white rounded-md">
-                                1
-                            </a>
-
-                            <a href="#" class="mx-1 px-3 py-2 bg-white text-gray-700 font-medium hover:bg-blue-500 hover:text-white rounded-md">
-                                2
-                            </a>
-
-                            <a href="#" class="mx-1 px-3 py-2 bg-white text-gray-700 font-medium hover:bg-blue-500 hover:text-white rounded-md">
-                                3
-                            </a>
-
-                            <a href="#" class="mx-1 px-3 py-2 bg-white text-gray-700 font-medium hover:bg-blue-500 hover:text-white rounded-md">
-                                Next
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="-mx-8 w-4/12 hidden lg:block">
-                    <div class="px-8">
-                        <h1 class="mb-4 text-xl font-bold text-gray-700">Authors</h1>
-                        <div class="flex flex-col bg-white max-w-sm px-6 py-4 mx-auto rounded-lg shadow-md">
-                            <ul class="-mx-4">
-                                <li class="flex items-center"><img
-                                        src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
-                                        alt="avatar" class="w-10 h-10 object-cover rounded-full mx-4">
-                                    <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Alex John</a><span
-                                            class="text-gray-700 text-sm font-light">Created 23 Posts</span></p>
-                                </li>
-                                <li class="flex items-center mt-6"><img
-                                        src="https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=333&amp;q=80"
-                                        alt="avatar" class="w-10 h-10 object-cover rounded-full mx-4">
-                                    <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Jane Doe</a><span
-                                            class="text-gray-700 text-sm font-light">Created 52 Posts</span></p>
-                                </li>
-                                <li class="flex items-center mt-6"><img
-                                        src="https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=281&amp;q=80"
-                                        alt="avatar" class="w-10 h-10 object-cover rounded-full mx-4">
-                                    <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Lisa Way</a><span
-                                            class="text-gray-700 text-sm font-light">Created 73 Posts</span></p>
-                                </li>
-                                <li class="flex items-center mt-6"><img
-                                        src="https://images.unsplash.com/photo-1500757810556-5d600d9b737d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=735&amp;q=80"
-                                        alt="avatar" class="w-10 h-10 object-cover rounded-full mx-4">
-                                    <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Steve Matt</a><span
-                                            class="text-gray-700 text-sm font-light">Created 245 Posts</span></p>
-                                </li>
-                                <li class="flex items-center mt-6"><img
-                                        src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=373&amp;q=80"
-                                        alt="avatar" class="w-10 h-10 object-cover rounded-full mx-4">
-                                    <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Khatab
-                                            Wedaa</a><span class="text-gray-700 text-sm font-light">Created 332 Posts</span>
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="mt-10 px-8">
-                        <h1 class="mb-4 text-xl font-bold text-gray-700">Categories</h1>
-                        <div class="flex flex-col bg-white px-4 py-6 max-w-sm mx-auto rounded-lg shadow-md">
-                            <ul>
-                                <li><a href="#" class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">-
-                                        AWS</a></li>
-                                <li class="mt-2"><a href="#"
-                                                    class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">-
-                                        Laravel</a></li>
-                                <li class="mt-2"><a href="#"
-                                                    class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">- Vue</a>
-                                </li>
-                                <li class="mt-2"><a href="#"
-                                                    class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">-
-                                        Design</a></li>
-                                <li class="flex items-center mt-2"><a href="#"
-                                                                      class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">-
-                                        Django</a></li>
-                                <li class="flex items-center mt-2"><a href="#"
-                                                                      class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">- PHP</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="mt-10 px-8">
-                        <h1 class="mb-4 text-xl font-bold text-gray-700">Recent Post</h1>
-                        <div class="flex flex-col bg-white px-8 py-6 max-w-sm mx-auto rounded-lg shadow-md">
-                            <div class="flex justify-center items-center"><a href="#"
-                                                                             class="px-2 py-1 bg-gray-600 text-sm text-green-100 rounded hover:bg-gray-500">Laravel</a>
-                            </div>
-                            <div class="mt-4"><a href="#" class="text-lg text-gray-700 font-medium hover:underline">Build
-                                    Your New Idea with Laravel Freamwork.</a></div>
-                            <div class="flex justify-between items-center mt-4">
-                                <div class="flex items-center"><img
-                                        src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
-                                        alt="avatar" class="w-8 h-8 object-cover rounded-full"><a href="#"
-                                                                                                  class="text-gray-700 text-sm mx-3 hover:underline">Alex John</a></div><span
-                                    class="font-light text-sm text-gray-600">Jun 1, 2020</span>
-                            </div>
+                <div class="w-full max-w-xl xl:px-8 xl:w-5/12">
+                    <div class="relative">
+                        <svg viewBox="0 0 52 24" fill="currentColor" class="absolute bottom-0 right-0 z-0 hidden w-32 -mb-8 -mr-20 text-pink-400 lg:w-32 lg:-mr-16 sm:block">
+                            <defs>
+                                <pattern id="766323e1-e594-4ffd-a688-e7275079d540" x="0" y="0" width=".135" height=".30">
+                                    <circle cx="1" cy="1" r=".7"></circle>
+                                </pattern>
+                            </defs>
+                            <rect fill="url(#766323e1-e594-4ffd-a688-e7275079d540)" width="52" height="24"></rect>
+                        </svg>
+                        <div class="relative bg-white rounded shadow-2xl p-7 sm:p-10">
+                            <h3 class="mb-4 text-xl font-semibold sm:text-center sm:mb-6 sm:text-2xl">
+                                Sign up for updates
+                            </h3>
+                            <form>
+                                <div class="mb-1 sm:mb-2">
+                                    <label for="name" class="inline-block mb-1 font-medium">Name</label>
+                                    <input placeholder="John Doe" required="" type="text" class="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline" id="name" name="name">
+                                </div>
+                                <div class="mb-1 sm:mb-2">
+                                    <label for="email" class="inline-block mb-1 font-medium">E-mail</label>
+                                    <input placeholder="john.doe@example.org" required="" type="text" class="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline" id="email" name="email">
+                                </div>
+                                <div class="mt-4 mb-2 sm:mb-4">
+                                    <button type="submit" class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-purple-400 hover:bg-purple-700 focus:shadow-outline focus:outline-none">
+                                        Subscribe
+                                    </button>
+                                </div>
+                                <p class="text-xs text-gray-600 sm:text-sm">
+                                    We respect your privacy. Unsubscribe at any time.
+                                </p>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="px-6 py-8">
+        <div class="flex flex-wrap justify-between container mx-auto">
+            <div class="w-full lg:w-8/12">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Post</h1>
+                    <div>
+                        <select class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <option>Latest</option>
+                            <option>Last Week</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <div class="w-full lg:flex px-6 py-6 bg-white rounded-lg shadow-md">
+                        <div class="h-60 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
+                            <img src="https://tailwindcss.com/img/card-left.jpg" alt="Can coffee make you a better developer">
+                        </div>
+                        <div class="bg-white rounded-b lg:rounded-b-none lg:rounded-r md:pl-4 pt-4 lg:pt-0 flex flex-col justify-between leading-normal">
+                            <div class="mb-5">
+                                <p class="text-sm text-grey-dark flex items-center">
+                                    <svg class="text-grey w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z"></path>
+                                    </svg>
+                                    Members only <a class="ml-2 px-1 bg-gray-300 hover:bg-gray-200 rounded-sm" href="">Login</a>
+                                </p>
+                                <div class="text-black font-bold text-xl mb-2">
+                                    <a class="hover:underline" href="">Can coffee make you a better developer?</a>
+                                </div>
+                                <a href="#" class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">Design</a>
+                                <a href="#" class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">Design</a>
+                                <a href="#" class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">Design</a>
+                                <p class="text-grey-darker text-base mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+                            </div>
+                            <div class="flex items-center flex-wrap">
+                                <img class="w-10 h-10 rounded-md mr-4" src="https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg" alt="Avatar of Jonathan Reinink">
+                                <div class="text-sm mr-4">
+                                    <p class="text-black leading-none">
+                                        <a href="" class="hover:underline">Jonathan Reinink</a>
+                                    </p>
+                                    <p class="text-grey-dark">Aug 18</p>
+                                </div>
+                                <div class="flex-1 items-center mt-3 sm:mt-0">
+                                    <div class="flex space-x-4 justify-end">
+                                        <a href="/" aria-label="Likes" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
+                                            <div class="mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700">
+                                                    <polyline points="6 23 1 23 1 12 6 12" fill="none" stroke-miterlimit="10"></polyline>
+                                                    <path d="M6,12,9,1H9a3,3,0,0,1,3,3v6h7.5a3,3,0,0,1,2.965,3.456l-1.077,7A3,3,0,0,1,18.426,23H6Z" fill="none" stroke="currentColor" stroke-miterlimit="10"></path>
+                                                </svg>
+                                            </div>
+                                            <p class="font-semibold">7.4K</p>
+                                        </a>
+                                        <a href="/" aria-label="Comments" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
+                                            <div class="mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700">
+                                                    <polyline points="23 5 23 18 19 18 19 22 13 18 12 18" fill="none" stroke-miterlimit="10"></polyline>
+                                                    <polygon points="19 2 1 2 1 14 5 14 5 19 12 14 19 14 19 2" fill="none" stroke="currentColor" stroke-miterlimit="10"></polygon>
+                                                </svg>
+                                            </div>
+                                            <p class="font-semibold">81</p>
+                                        </a>
+                                        <a href="/" aria-label="shares" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
+                                            <div class="mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="none" stroke="currentColor" class="w-5 h-5 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700">
+                                                    <circle cx="18" cy="5" r="3"></circle>
+                                                    <circle cx="6" cy="12" r="3"></circle>
+                                                    <circle cx="18" cy="19" r="3"></circle>
+                                                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                                                </svg>
+                                            </div>
+                                            <p class="font-semibold">22</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
+                        <div class="flex justify-between items-center"><span class="font-light text-gray-600">mar 4,
+                                2019</span><a href="#" class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">Design</a>
+                        </div>
+                        <div class="mt-2"><a href="#" class="text-2xl text-gray-700 font-bold hover:underline">Accessibility tools for
+                                designers and developers</a>
+                            <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
+                                reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-4"><a href="#" class="text-blue-500 hover:underline">Read more</a>
+                            <div><a href="#" class="flex items-center"><img src="https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=333&amp;q=80" alt="avatar" class="mx-4 w-10 h-10 object-cover rounded-md hidden sm:block">
+                                    <h1 class="text-gray-700 font-bold hover:underline">Jane Doe</h1>
+                                </a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
+                        <div class="flex justify-between items-center"><span class="font-light text-gray-600">Feb 14,
+                                2019</span><a href="#" class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">PHP</a>
+                        </div>
+                        <div class="mt-2"><a href="#" class="text-2xl text-gray-700 font-bold hover:underline">PHP:
+                                Array to Map</a>
+                            <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
+                                reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-4"><a href="#" class="text-blue-500 hover:underline">Read more</a>
+                            <div><a href="#" class="flex items-center"><img src="https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=281&amp;q=80" alt="avatar" class="mx-4 w-10 h-10 object-cover rounded-md hidden sm:block">
+                                    <h1 class="text-gray-700 font-bold hover:underline">Lisa Way</h1>
+                                </a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
+                        <div class="flex justify-between items-center"><span class="font-light text-gray-600">Dec 23,
+                                2018</span><a href="#" class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">Django</a>
+                        </div>
+                        <div class="mt-2"><a href="#" class="text-2xl text-gray-700 font-bold hover:underline">Django
+                                Dashboard - Learn by Coding</a>
+                            <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
+                                reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-4"><a href="#" class="text-blue-500 hover:underline">Read more</a>
+                            <div><a href="#" class="flex items-center"><img src="https://images.unsplash.com/photo-1500757810556-5d600d9b737d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=735&amp;q=80" alt="avatar" class="mx-4 w-10 h-10 object-cover rounded-md hidden sm:block">
+                                    <h1 class="text-gray-700 font-bold hover:underline">Steve Matt</h1>
+                                </a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
+                        <div class="flex justify-between items-center"><span class="font-light text-gray-600">Mar 10,
+                                2018</span><a href="#" class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500">Testing</a>
+                        </div>
+                        <div class="mt-2"><a href="#" class="text-2xl text-gray-700 font-bold hover:underline">TDD
+                                Frist</a>
+                            <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim
+                                reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-4"><a href="#" class="text-blue-500 hover:underline">Read more</a>
+                            <div><a href="#" class="flex items-center"><img src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=373&amp;q=80" alt="avatar" class="mx-4 w-10 h-10 object-cover rounded-md hidden sm:block">
+                                    <h1 class="text-gray-700 font-bold hover:underline">Khatab Wedaa</h1>
+                                </a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <div class="flex">
+                        <a href="#" class="mx-1 px-3 py-2 bg-white text-gray-500 font-medium rounded-md cursor-not-allowed">
+                            previous
+                        </a>
 
-        <div class="pt-12 px-6">
-            <div class="w-full border-gray-300 border-t lg:w-11/12 md:w-11/12 lg:mx-auto md:mx-auto">
-                <div class="container mx-auto pt-12">
-                    <div class="xl:flex lg:flex md:flex pt-6">
-                        <div class="w-11/12 xl:w-3/6 lg:w-2/5 mx-auto lg:mx-0 xl:mx-0">
-                            <div class="flex items-center mb-6 xl:mb-0 lg:mb-0">
-                                <svg class="w-12 h-12" id="logo" enable-background="new 0 0 300 300" height="44" viewBox="0 0 300 300" width="43" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <g>
-                                        <path
-                                            fill="#4c51bf"
-                                            d="m234.735 35.532c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16zm0 24c-4.412 0-8-3.588-8-8s3.588-8 8-8 8 3.588 8 8-3.588 8-8 8zm-62.529-14c0-2.502 2.028-4.53 4.53-4.53s4.53 2.028 4.53 4.53c0 2.501-2.028 4.529-4.53 4.529s-4.53-2.027-4.53-4.529zm89.059 60c0 2.501-2.028 4.529-4.53 4.529s-4.53-2.028-4.53-4.529c0-2.502 2.028-4.53 4.53-4.53s4.53 2.029 4.53 4.53zm-40.522-5.459-88-51.064c-1.242-.723-2.773-.723-4.016 0l-88 51.064c-1.232.715-1.992 2.033-1.992 3.459v104c0 1.404.736 2.705 1.938 3.428l88 52.936c.635.381 1.35.572 2.062.572s1.428-.191 2.062-.572l88-52.936c1.201-.723 1.938-2.023 1.938-3.428v-104c0-1.426-.76-2.744-1.992-3.459zm-90.008-42.98 80.085 46.47-52.95 31.289-23.135-13.607v-21.713c0-2.209-1.791-4-4-4s-4 1.791-4 4v21.713l-26.027 15.309c-1.223.719-1.973 2.029-1.973 3.447v29.795l-52 30.727v-94.688zm0 198.707-80.189-48.237 51.467-30.412 24.723 14.539v19.842c0 2.209 1.791 4 4 4s4-1.791 4-4v-19.842l26.027-15.307c1.223-.719 1.973-2.029 1.973-3.447v-31.667l52-30.728v94.729z"
-                                        />
+                        <a href="#" class="mx-1 px-3 py-2 bg-white text-gray-700 font-medium hover:bg-blue-500 hover:text-white rounded-md">
+                            1
+                        </a>
+
+                        <a href="#" class="mx-1 px-3 py-2 bg-white text-gray-700 font-medium hover:bg-blue-500 hover:text-white rounded-md">
+                            2
+                        </a>
+
+                        <a href="#" class="mx-1 px-3 py-2 bg-white text-gray-700 font-medium hover:bg-blue-500 hover:text-white rounded-md">
+                            3
+                        </a>
+
+                        <a href="#" class="mx-1 px-3 py-2 bg-white text-gray-700 font-medium hover:bg-blue-500 hover:text-white rounded-md">
+                            Next
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="-mx-8 flex-1 lg:flex-none lg:w-4/12">
+                <div class="mt-10 lg:mt-0 px-8">
+                    <h1 class="mb-4 text-xl font-bold text-gray-700">Authors</h1>
+                    <div class="flex flex-col bg-white px-6 py-4 mx-auto rounded-lg shadow-md">
+                        <ul class="-mx-4">
+                            <li class="flex items-center"><img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80" alt="avatar" class="w-10 h-10 object-cover rounded-md mx-4">
+                                <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Alex John</a><span class="text-gray-700 text-sm font-light">Created 23 Posts</span></p>
+                            </li>
+                            <li class="flex items-center mt-6"><img src="https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=333&amp;q=80" alt="avatar" class="w-10 h-10 object-cover rounded-md mx-4">
+                                <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Jane Doe</a><span class="text-gray-700 text-sm font-light">Created 52 Posts</span></p>
+                            </li>
+                            <li class="flex items-center mt-6"><img src="https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=281&amp;q=80" alt="avatar" class="w-10 h-10 object-cover rounded-md mx-4">
+                                <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Lisa Way</a><span class="text-gray-700 text-sm font-light">Created 73 Posts</span></p>
+                            </li>
+                            <li class="flex items-center mt-6"><img src="https://images.unsplash.com/photo-1500757810556-5d600d9b737d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=735&amp;q=80" alt="avatar" class="w-10 h-10 object-cover rounded-md mx-4">
+                                <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Steve Matt</a><span class="text-gray-700 text-sm font-light">Created 245 Posts</span></p>
+                            </li>
+                            <li class="flex items-center mt-6"><img src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=373&amp;q=80" alt="avatar" class="w-10 h-10 object-cover rounded-md mx-4">
+                                <p><a href="#" class="text-gray-700 font-bold mx-1 hover:underline">Khatab
+                                        Wedaa</a><span class="text-gray-700 text-sm font-light">Created 332 Posts</span>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-10 px-8">
+                    <h1 class="mb-4 text-xl font-bold text-gray-700">Categories</h1>
+                    <div class="flex flex-col bg-white px-4 py-6 mx-auto rounded-lg shadow-md">
+                        <ul>
+                            <li><a href="#" class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">-
+                                    AWS</a></li>
+                            <li class="mt-2"><a href="#" class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">-
+                                    Laravel</a></li>
+                            <li class="mt-2"><a href="#" class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">- Vue</a>
+                            </li>
+                            <li class="mt-2"><a href="#" class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">-
+                                    Design</a></li>
+                            <li class="flex items-center mt-2"><a href="#" class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">-
+                                    Django</a></li>
+                            <li class="flex items-center mt-2"><a href="#" class="text-gray-700 font-bold mx-1 hover:text-gray-600 hover:underline">- PHP</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-10 px-8">
+                    <h1 class="mb-4 text-xl font-bold text-gray-700">Recent Post</h1>
+                    <div class="flex flex-col bg-white px-8 py-6 mx-auto rounded-lg shadow-md">
+                        <div class="flex justify-center items-center"><a href="#" class="px-2 py-1 bg-gray-600 text-sm text-green-100 rounded hover:bg-gray-500">Laravel</a>
+                        </div>
+                        <div class="mt-4"><a href="#" class="text-lg text-gray-700 font-medium hover:underline">Build
+                                Your New Idea with Laravel Freamwork.</a></div>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="flex items-center"><img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80" alt="avatar" class="w-8 h-8 object-cover rounded-md"><a href="#" class="text-gray-700 text-sm mx-3 hover:underline">Alex John</a></div><span class="font-light text-sm text-gray-600">Jun 1, 2020</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pt-8 px-6 bg-black text-white">
+        <div class="w-full border-gray-300 lg:w-11/12 md:w-11/12 lg:mx-auto md:mx-auto">
+            <div class="container mx-auto pt-6">
+                <div class="grid gap-8 row-gap-5 mb-8 lg:grid-cols-6">
+                    <div class="md:max-w-md lg:col-span-2">
+                        <a href="/" aria-label="Go home" title="Company" class="inline-flex items-center">
+                            <svg class="w-8 text-deep-purple-accent-400" viewBox="0 0 24 24" stroke-linejoin="round" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" stroke="currentColor" fill="none">
+                                <rect x="3" y="1" width="7" height="12"></rect>
+                                <rect x="3" y="17" width="7" height="6"></rect>
+                                <rect x="14" y="1" width="7" height="6"></rect>
+                                <rect x="14" y="11" width="7" height="12"></rect>
+                            </svg>
+                            <span class="ml-2 text-xl font-bold tracking-wide text-gray-200 uppercase">Company</span>
+                        </a>
+                        <div class="mt-4 lg:max-w-sm">
+                            <p class="text-sm text-gray-200">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+                            </p>
+                            <p class="mt-4 text-sm text-gray-200">
+                                Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-5 row-gap-4 lg:col-span-4 md:grid-cols-4">
+                        <div>
+                            <p class="font-semibold tracking-wide text-gray-200">Category</p>
+                            <ul class="mt-2 space-y-2">
+                                <li>
+                                    <a href="/" class="text-gray-300 transition-colors duration-300 hover:text-gray-200">News</a>
+                                </li>
+                                <li>
+                                    <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">World</a>
+                                </li>
+                                <li>
+                                    <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Games</a>
+                                </li>
+                                <li>
+                                    <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">References</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold tracking-wide text-gray-800">Business</p>
+                            <ul class="mt-2 space-y-2">
+                                <li>
+                                    <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Web</a>
+                                </li>
+                                <li>
+                                    <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">eCommerce</a>
+                                </li>
+                                <li>
+                                    <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Business</a>
+                                </li>
+                                <li>
+                                    <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Entertainment</a>
+                                </li>
+                                <li>
+                                    <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Portfolio</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-span-2 border p-5 rounded-md shadow-md">
+                            <div class="flex mb-5 align-center">
+                                <svg class="w-10 h-10 text-gray-300 fill-current mr-3" xmlns="http://www.w3.org/2000/svg" width="512" height="512.002" viewBox="0 0 512 512.002">
+                                    <g transform="translate(0 0.002)">
+                                        <path d="M64,257.6,227.9,376a47.72,47.72,0,0,0,56.2,0L448,257.6V96a32,32,0,0,0-32-32H96A32,32,0,0,0,64,96ZM160,160a16,16,0,0,1,16-16H336a16,16,0,0,1,16,16v16a16,16,0,0,1-16,16H176a16,16,0,0,1-16-16Zm0,80a16,16,0,0,1,16-16H336a16,16,0,0,1,16,16v16a16,16,0,0,1-16,16H176a16,16,0,0,1-16-16Z" opacity="0.4"></path><path d="M352,160a16,16,0,0,0-16-16H176a16,16,0,0,0-16,16v16a16,16,0,0,0,16,16H336a16,16,0,0,0,16-16Zm-16,64H176a16,16,0,0,0-16,16v16a16,16,0,0,0,16,16H336a16,16,0,0,0,16-16V240A16,16,0,0,0,336,224ZM329.4,41.4C312.6,29.2,279.2-.3,256,0c-23.2-.3-56.6,29.2-73.4,41.4L152,64H360ZM64,129c-23.9,17.7-42.7,31.6-45.6,34A48,48,0,0,0,0,200.7v10.7l64,46.2Zm429.6,34c-2.9-2.3-21.7-16.3-45.6-33.9V257.6l64-46.2V200.7A48,48,0,0,0,493.6,163ZM256,417.1a79.989,79.989,0,0,1-46.888-15.192L0,250.9V464a48,48,0,0,0,48,48H464a48,48,0,0,0,48-48V250.9l-209.1,151A80,80,0,0,1,256,417.1Z"></path>
                                     </g>
                                 </svg>
-                                <p class="ml-3 font-bold text-xl">The North</p>
+                                <h1 class="text-xl md:text-2xl font-bold leading-tight text-gray-100">Stay in the loop</h1>
                             </div>
-                        </div>
-                        <div class="w-11/12 xl:w-1/6 lg:w-2/5 mx-auto lg:mx-0 xl:mx-0 pt-3 xl:flex xl:justify-end pl-3 sm:pl-0">
-                            <ul>
-                                <li class="text-gray-800 font-bold text-xl mb-6">Community</li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">About Us</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">Guidelines and how to</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">Quote from the best</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">How to start a blog</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="w-11/12 xl:w-1/6 lg:w-2/5 mx-auto lg:mx-0 xl:mx-0 pt-3 xl:flex xl:justify-end pl-3 sm:pl-0">
-                            <ul>
-                                <li class="text-gray-800 font-bold text-xl mb-6">Getting Started</li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">About Us</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">Guidelines and how to</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">Quote from the best</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">How to start a blog</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">Quote from the best</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">Guidelines and how to</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="w-11/12 xl:w-1/6 lg:w-2/5 mx-auto lg:mx-0 xl:mx-0 pt-3 xl:flex xl:justify-end pl-3 sm:pl-0">
-                            <ul>
-                                <li class="text-gray-800 font-bold text-xl mb-6">Resources</li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">Accessibility</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">Usability</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">Marketplace</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">Design & Dev</a>
-                                </li>
-                                <li class="text-base text-gray-600 hover:text-gray-700 mb-5">
-                                    <a href="javascript:void(0)">Marketplace</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="xl:flex flex-wrap justify-between xl:mt-24 mt-16 pb-6 pl-3 sm:pl-0">
-                        <div class="w-11/12 xl:w-2/6 mx-auto lg:mx-0 xl:mx-0 mb-6 xl:mb-0">
-                            <p class="text-gray-800 text-base">2020 The North. All Rights Reserved</p>
-                        </div>
-                        <div class="w-11/12 xl:w-2/6 mx-auto lg:mx-0 xl:mx-0 mb-6 lg:mb-0 xl:mb-0">
-                            <ul class="xl:flex lg:flex md:flex sm:flex justify-between">
-                                <li class="text-gray-800 hover:text-gray-900 text-base mb-4 sm:mb-0">
-                                    <a href="javascript:void(0)">Terms of service</a>
-                                </li>
-                                <li class="text-gray-800 hover:text-gray-900 text-base mb-4 sm:mb-0">
-                                    <a href="javascript:void(0)">Privacy Policy</a>
-                                </li>
-                                <li class="text-gray-800 hover:text-gray-900 text-base mb-4 sm:mb-0">
-                                    <a href="javascript:void(0)">Security</a>
-                                </li>
-                                <li class="text-gray-800 hover:text-gray-900 text-base mb-4 sm:mb-0">
-                                    <a href="javascript:void(0)">Sitemap</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="w-11/12 xl:w-1/6 lg:w-1/6 sm:w-11/12 mx-auto lg:mx-0 xl:mx-0">
-                            <div class="flex justify-start sm:justify-start xl:justify-end space-x-6 pr-2 xl:pr-0 lg:pr-0 md:pr-0 sm:pr-0">
-                                <div>
-                                    <a href="javascript:void(0)">
-                                        <svg aria-label="Twitter" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter">
-                                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="javascript:void(0)">
-                                        <svg aria-label="Instagram" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
-                                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="javascript:void(0)">
-                                        <svg aria-label="Dribble" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dribbble" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#718096" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" />
-                                            <circle cx="12" cy="12" r="9" />
-                                            <path d="M9 3.6c5 6 7 10.5 7.5 16.2" />
-                                            <path d="M6.4 19c3.5-3.5 6-6.5 14.5-6.4" />
-                                            <path d="M3.1 10.75c5 0 9.814-.38 15.314-5" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="javascript:void(0)">
-                                        <svg aria-label="Github" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github">
-                                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                                        </svg>
-                                    </a>
+
+                            <div class="card-text">
+                                <p class="text-base md:text-lg text-gray-300 mt-3 ">Join 4k+ happy subscribers!</p>
+                            </div>
+
+                            <div class="card-mail mt-3">
+                                <div class="bg-white rounded-lg shadow-sm border">
+                                    <div class="flex flex-wrap justify-between md:flex-row">
+                                        <input type="email" class="m-1 p-2 appearance-none text-gray-700 text-sm focus:outline-none border-none rounded-md flex-1" placeholder="Enter your email">
+                                        <button class="w-full m-1 p-2 text-sm bg-gray-800 hover:bg-gray-600 text-gray-200 rounded-lg font-semibold uppercase lg:w-auto">subscribe</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="flex flex-col justify-between py-5 border-t sm:flex-row">
+                    <p class="text-sm text-gray-400 text-center">
+                        © Copyright 2020 Lorem Inc. All rights reserved.
+                    </p>
+                    <div class="flex items-center justify-center space-x-4 sm:mt-0 mt-3">
+                        <a href="/" class="text-gray-500 transition-colors duration-300 hover:text-gray-400">
+                            <svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
+                                <path d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z"></path>
+                            </svg>
+                        </a>
+                        <a href="/" class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400">
+                            <svg viewBox="0 0 30 30" fill="currentColor" class="h-6">
+                                <circle cx="15" cy="15" r="4"></circle>
+                                <path d="M19.999,3h-10C6.14,3,3,6.141,3,10.001v10C3,23.86,6.141,27,10.001,27h10C23.86,27,27,23.859,27,19.999v-10   C27,6.14,23.859,3,19.999,3z M15,21c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S18.309,21,15,21z M22,9c-0.552,0-1-0.448-1-1   c0-0.552,0.448-1,1-1s1,0.448,1,1C23,8.552,22.552,9,22,9z"></path>
+                            </svg>
+                        </a>
+                        <a href="/" class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400">
+                            <svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
+                                <path d="M22,0H2C0.895,0,0,0.895,0,2v20c0,1.105,0.895,2,2,2h11v-9h-3v-4h3V8.413c0-3.1,1.893-4.788,4.659-4.788 c1.325,0,2.463,0.099,2.795,0.143v3.24l-1.918,0.001c-1.504,0-1.795,0.715-1.795,1.763V11h4.44l-1,4h-3.44v9H22c1.105,0,2-0.895,2-2 V2C24,0.895,23.105,0,22,0z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-
-    </body>
-</html>
+</x-guest-layout>
