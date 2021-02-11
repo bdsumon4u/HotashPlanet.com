@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Manage;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
 use App\Models\Permission;
 use App\Models\Role;

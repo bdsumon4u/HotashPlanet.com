@@ -13,9 +13,10 @@
 
     <!-- Styles -->
     <link rel="stylesheet" id="css-main" href="{{ asset('css/oneui.min.css') }}">
-{{--    <link rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
 
     @livewireStyles
+
+    @stack('styles')
 
     <meta name="description" content="">
     <meta name="author" content="bdsumon4u">
@@ -1567,9 +1568,6 @@
 <script src="{{ asset('js/oneui.app.min.js') }}"></script>
 @stack('modals')
 @livewireScripts
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
-<script src="{{ asset('js/dashboard.min.js') }}"></script>
-<script>jQuery(function(){ One.helpers([ 'sparkline']); });</script>
+@stack('scripts')
 </body>
 </html>

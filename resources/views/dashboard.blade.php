@@ -564,4 +564,11 @@
             </nav>
         </div>
     </div>
+
+    @push('scripts')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
+        <script src="{{ asset('js/dashboard.min.js') }}"></script>
+        <script>jQuery(function(){ One.helpers(['sparkline']); });</script>
+    @endpush
 </x-app-layout>

@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Manage\CategoryController;
+use App\Http\Controllers\Manage\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,12 @@ Route::get('/', function () {
 
 Route::view('article', 'article');
 
-Route::resources([
-    'roles' => RoleController::class,
-]);
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', DashboardController::class)->name('dashboard');
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::group(['prefix' => 'manage', 'as' => 'manage.'], function () {
+        Route::resources([
+            'roles' => RoleController::class,
+            'categories' => CategoryController::class,
+        ]);
+    });
+});

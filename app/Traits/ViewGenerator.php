@@ -23,7 +23,7 @@ trait ViewGenerator
         $viewName = $viewName ?: debug_backtrace()[1]['function'];
 
         if (!$this->viewPath) {
-            $controllerName = Str::afterLast(get_called_class(), '\\');
+            $controllerName = Str::after(get_called_class(), 'App\\Http\\Controllers\\');
             $controllerType = Str::beforeLast($controllerName, 'Controller');
 
             $path = array_map(function ($item) {
